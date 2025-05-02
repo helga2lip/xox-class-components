@@ -1,5 +1,7 @@
-import { useSelector, useDispatch } from 'react-redux';
+/* eslint-disable react/prop-types */
+import { connect } from 'react-redux';
 import styles from './Field.module.css'
+import { Component } from 'react';
 
 const WIN_PATTERNS = [
     [0, 1, 2], [3, 4, 5], [6, 7, 8], // Варианты побед по горизонтали
@@ -7,19 +9,13 @@ const WIN_PATTERNS = [
     [0, 4, 8], [2, 4, 6] // Варианты побед по диагонали
 ];
 
-export const FieldLayout = () => {
+class FieldLayoutContainer extends Component {
 
-    const currentPlayer = useSelector((state) => state.currentPlayer);
-    const field = useSelector((state) => state.field);
-    const isGameEnded = useSelector((state) => state.isGameEnded);
-
-    const dispatch = useDispatch();
-
-    const onFieldClick = (index) => {
-        if (!field[index] && !isGameEnded) {
-            const newField = [...field]
-            newField.splice(index, 1, currentPlayer)
-            dispatch({ type: 'SET_FIELD', payload: newField })
+    onFieldClick = (index) => {
+        if (!this.props.field[index] && !this.props.isGameEnded) {
+            const newField = [...this.props.field]
+            newField.splice(index, 1, this.props.currentPlayer)
+            this.props.dispatch({ type: 'SET_FIELD', payload: newField })
 
             const hasWinner = WIN_PATTERNS.some((pattern) => {
                 return pattern.every((position) => {
@@ -30,30 +26,42 @@ export const FieldLayout = () => {
             })
 
             if (hasWinner) {
-                dispatch({ type: 'SET_IS_GAME_ENDED', payload: true })
+                this.props.dispatch({ type: 'SET_IS_GAME_ENDED', payload: true })
             } else {
                 const isFieldFull = newField.every((cell) => {
                     return cell !== ''
                 })
                 if (isFieldFull) {
-                    dispatch({ type: 'SET_IS_DRAW', payload: true })
+                    this.props.dispatch({ type: 'SET_IS_DRAW', payload: true })
                 } else {
-                    if (currentPlayer === 'X') {
-                        dispatch({ type: 'SET_CURRENT_PLAYER', payload: 'O' })
-                    } else { dispatch({ type: 'SET_CURRENT_PLAYER', payload: 'X' }) }
+                    if (this.props.currentPlayer === 'X') {
+                        this.props.dispatch({ type: 'SET_CURRENT_PLAYER', payload: 'O' })
+                    } else { this.props.dispatch({ type: 'SET_CURRENT_PLAYER', payload: 'X' }) }
                 }
             }
         }
     }
 
-    return <div className={styles.fieldLayout}>
-        <div className={styles.fieldGrid}>
-            {field.map((cell, index) => {
-                return <div key={index} className={styles.fieldCell} onClick={() => onFieldClick(index)}>
-                    {cell}
-                </div>
-            })}
+    render() {
+        return <div className={styles.fieldLayout}>
+            <div className={styles.fieldGrid}>
+                {this.props.field.map((cell, index) => {
+                    return <div key={index} className={styles.fieldCell} onClick={() => this.onFieldClick(index)}>
+                        {cell}
+                    </div>
+                })}
 
-        </div>
-    </div>
+            </div>
+        </div >
+    }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        currentPlayer: state.currentPlayer,
+        isGameEnded: state.isGameEnded,
+        field: state.field,
+    }
+}
+
+export const FieldLayout = connect(mapStateToProps)(FieldLayoutContainer);

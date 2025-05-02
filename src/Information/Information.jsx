@@ -1,7 +1,8 @@
+import { Component } from "react";
 import { InformationLayout } from "./InformationLayout";
 
-export function Information() {
-  return (
-    <InformationLayout />
-  )
+export class Information extends Component {
+  render() {
+    return <InformationLayout />
+  }
 }

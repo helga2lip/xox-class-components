@@ -1,7 +1,8 @@
+import { Component } from "react"
 import { FieldLayout } from "./FieldLayout"
 
-export function Field() {
-  return (
-    <FieldLayout />
-  )
+export class Field extends Component {
+  render() {
+    return <FieldLayout />
+  }
 }

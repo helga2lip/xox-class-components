@@ -1,7 +1,8 @@
+import { Component } from 'react'
 import { GameLayout } from './GameLayout'
 
-export function Game() {
-  return (
-    <GameLayout />
-  )
+export class Game extends Component {
+  render() {
+    return <GameLayout />
+  }
 }

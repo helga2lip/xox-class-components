@@ -1,27 +1,37 @@
-import { useSelector, useDispatch } from 'react-redux';
+/* eslint-disable react/prop-types */
+import { connect } from 'react-redux';
 import styles from './Information.module.css'
+import { Component } from 'react';
 
-export const InformationLayout = () => {
+class InformationLayoutContainer extends Component {
 
-    const currentPlayer = useSelector((state) => state.currentPlayer);
-    const isGameEnded = useSelector((state) => state.isGameEnded);
-    const isDraw = useSelector((state) => state.isDraw);
-
-    const dispatch = useDispatch();
-
-    const onResetClick = () => {
-        dispatch({ type: 'RESTART_GAME' })
+    onResetClick = () => {
+        this.props.dispatch({ type: 'RESTART_GAME' })
     }
 
-    return <div className={styles.informationLayout}>
-        <div className={styles.info}>
-            {isGameEnded
-                ? `Победа: ${currentPlayer}`
-                : isDraw
-                    ? 'Ничья'
-                    : `Ходит: ${currentPlayer}`
-            }
-        </div>
-        <button className={styles.startButton} onClick={onResetClick}>Начать заново</button>
-    </div>
+    render() {
+        return <div className={styles.informationLayout}>
+            <div className={styles.info}>
+                {this.props.isGameEnded
+                    ? `Победа: ${this.props.currentPlayer}`
+                    : this.props.isDraw
+                        ? 'Ничья'
+                        : `Ходит: ${this.props.currentPlayer}`
+                }
+            </div>
+            <button className={styles.startButton} onClick={this.onResetClick}>Начать заново</button>
+        </div >
+    }
+
+
 }
+
+const mapStateToProps = (state) => {
+    return {
+        currentPlayer: state.currentPlayer,
+        isGameEnded: state.isGameEnded,
+        isDraw: state.isDraw,
+    }
+}
+
+export const InformationLayout = connect(mapStateToProps)(InformationLayoutContainer);
