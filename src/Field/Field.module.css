@@ -1,0 +1,15 @@
+.fieldGrid {
+  height: 400px;
+  display: grid;
+  grid-template: 1fr 1fr 1fr/1fr 1fr 1fr;
+}
+
+.fieldCell {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: #6c5b7b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 5em;
+  cursor: pointer;
+}

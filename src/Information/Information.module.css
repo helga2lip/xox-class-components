@@ -1,0 +1,22 @@
+.informationLayout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.info {
+  font-size: 1.5em;
+}
+
+.startButton {
+  padding: 8px 20px;
+  background: #f67280;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  font-size: 1.2em;
+  color: white;
+  text-transform: uppercase;
+  cursor: pointer;
+}
