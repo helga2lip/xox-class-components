@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { connect } from 'react-redux';
-import styles from './Field.module.css'
 import { Component } from 'react';
 
 const WIN_PATTERNS = [
@@ -43,10 +42,10 @@ class FieldLayoutContainer extends Component {
     }
 
     render() {
-        return <div className={styles.fieldLayout}>
-            <div className={styles.fieldGrid}>
+        return <div>
+            <div className="h-96 grid grid-cols-3 grid-rows-3 gap-0">
                 {this.props.field.map((cell, index) => {
-                    return <div key={index} className={styles.fieldCell} onClick={() => this.onFieldClick(index)}>
+                    return <div key={index} className="border-white border-2 bg-gray-500 flex justify-center items-center text-5xl cursor-pointer" onClick={() => this.onFieldClick(index)}>
                         {cell}
                     </div>
                 })}

@@ -1,7 +1,0 @@
-.gameLayout {
-  margin: 40px auto;
-  width: 400px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}

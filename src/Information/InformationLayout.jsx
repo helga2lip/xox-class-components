@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { connect } from 'react-redux';
-import styles from './Information.module.css'
 import { Component } from 'react';
 
 class InformationLayoutContainer extends Component {
@@ -11,7 +10,7 @@ class InformationLayoutContainer extends Component {
 
     render() {
         return <div className="flex justify-between items-center">
-            <div className={styles.info}>
+            <div className="text-2xl">
                 {this.props.isGameEnded
                     ? `Победа: ${this.props.currentPlayer}`
                     : this.props.isDraw
@@ -19,7 +18,7 @@ class InformationLayoutContainer extends Component {
                         : `Ходит: ${this.props.currentPlayer}`
                 }
             </div>
-            <button className={styles.startButton} onClick={this.onResetClick}>Начать заново</button>
+            <button className="px-5 py-2 bg-orange-400 rounded-md text-2xl" onClick={this.onResetClick}>Начать заново</button>
         </div >
     }
 

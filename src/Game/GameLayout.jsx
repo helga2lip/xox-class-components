@@ -1,11 +1,10 @@
 import { Component } from "react"
 import { Field } from "../Field/Field"
 import { Information } from "../Information/Information"
-import styles from './Game.module.css'
 
 export class GameLayout extends Component {
     render() {
-        return <div className={styles.gameLayout}>
+        return <div className="mx-auto my-10 w-96 flex flex-col gap-5">
             <Information />
             <Field />
         </div >
