@@ -10,7 +10,7 @@ class InformationLayoutContainer extends Component {
     }
 
     render() {
-        return <div className={styles.informationLayout}>
+        return <div className="flex justify-between items-center">
             <div className={styles.info}>
                 {this.props.isGameEnded
                     ? `Победа: ${this.props.currentPlayer}`
